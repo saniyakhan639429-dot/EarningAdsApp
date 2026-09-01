@@ -11,6 +11,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check Android project
+        run: |
+          if [ ! -f "gradlew" ]; then
+            echo "ERROR: gradlew file nahi mili."
+            echo "Pehle Android project ki files repository me upload karo."
+            exit 1
+          fi
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -27,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: '**/build/outputs/apk/**/*.apk'
+          path: "**/build/outputs/apk/**/*.apk"
